@@ -2,6 +2,7 @@ package com.zeroten.flow;
 
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -183,5 +184,61 @@ public class IfElseTest {
             }
         }
         System.out.println("累加结果：" + total);
+    }
+
+    @Test
+    public void testVampireNumber() {
+        /**
+         * 找出四位数的所有吸血鬼数字
+         * 吸血鬼数字是指位数为偶数的数字，可以由一对数字相乘而得到，而这对数字各包含乘积的一半位数的数字，
+         * 其中从最初的数字中选取的数字可以任意排序.
+         * 例如下列数字都是吸血鬼数字
+         *     1260=21*60
+         *     1827=21*87
+         *     2187=27*81
+         */
+        int sum = 0;
+        int[] startList = new int[4];
+        int[] productList = new int[4];
+        for (int i = 10; i < 100; i++) {
+            for (int j = 10; j < 100; j++) {
+                int product = i * j;
+                if (product > 999 && product < 10000) {
+                    // i的十位
+                    startList[0] = i / 10;
+                    // i的个位
+                    startList[1] = i % 10;
+                    // j的十位
+                    startList[2] = j / 10;
+                    // j的个位
+                    startList[3] = j % 10;
+                    // 总和千位
+                    productList[0] = product / 1000;
+                    // 总和百位
+                    productList[1] = (product % 1000) / 100;
+                    // 总和十位
+                    productList[2] = product % 1000 % 100 / 10;
+                    // 总和个位
+                    productList[3] = product % 1000 % 100 % 10;
+                    int count = 0;
+                    for (int x = 0; x < 4; x++) {
+                        for (int y = 0; y < 4; y++) {
+                            if (startList[x] == productList[y]){
+                                count++;
+                                startList[x] = -1;
+                                productList[y] = -2;
+                                if (count == 4) {
+                                    sum++;
+                                    System.out.println("第" + sum + "组: " + i + " * " + j + " : " + product);
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
+
     }
 }
