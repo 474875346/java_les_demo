@@ -2,16 +2,15 @@ package com.zeroten.flow;
 
 import org.testng.annotations.Test;
 
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class IfElseTest {
     public static void main(String[] args) {
         IfElseTest VC = new IfElseTest();
-//        VC.testIfElse();
-//        VC.testSwitch();
-        VC.test2();
+        VC.testIfElse(); // 年龄判断
+        VC.testSwitch(); // 机器人指令
+        VC.test2(); // 第二个练习
+        VC.testpalindrome(); // 回文数
     }
 
     public void testIfElse() {
@@ -176,7 +175,7 @@ public class IfElseTest {
 
     @Test
     public void test3() {
-//        找出 0 ~ 100 范围内能被7整除的数，并计算它们累计相加的结果。
+        // 找出 0 ~ 100 范围内能被7整除的数，并计算它们累计相加的结果。
         int total = 0;
         for (int i = 0; i < 101; i++) {
             if (i % 7 == 0) {
@@ -223,7 +222,7 @@ public class IfElseTest {
                     int count = 0;
                     for (int x = 0; x < 4; x++) {
                         for (int y = 0; y < 4; y++) {
-                            if (startList[x] == productList[y]){
+                            if (startList[x] == productList[y]) {
                                 count++;
                                 startList[x] = -1;
                                 productList[y] = -2;
@@ -240,5 +239,29 @@ public class IfElseTest {
             }
         }
 
+    }
+
+
+    public void testpalindrome() {
+        // 判断一个整数是否是回文数，回文数是指正序（从左向右）和 倒序（从右向左）读的是一样的整数。
+        System.out.println("请输入一个整数:");
+        Scanner input = new Scanner(System.in);
+        int a = input.nextInt();
+        System.out.println("是否是回文数:" + isPalindrome(a));
+    }
+
+    public static boolean isPalindrome(int x) {
+        String xStr = x + "";
+        String[] xArray = xStr.split("");
+        Collections.reverse(Arrays.asList(xArray));
+        String rexStr = "";
+        for (int i = 0; i < xArray.length; i++) {
+            rexStr += xArray[i];
+        }
+        if (xStr.equals(rexStr)) {
+            return true;
+        }
+
+        return false;
     }
 }
